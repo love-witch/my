@@ -133,6 +133,29 @@
 
   .hero-content{ position:relative; z-index:2; }
 
+  /* logo slot — set the img src to your logo file (transparent PNG/SVG recommended);
+     until an image is added, a small dashed placeholder is shown */
+  .logo-slot{
+    position:relative; width:11.5rem; height:4.4rem; margin-bottom:2rem;
+  }
+  .logo-slot img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:contain; object-position:left center; display:block;
+  }
+  .logo-placeholder{
+    position:absolute; inset:0;
+    border:1.5px dashed rgba(246,242,234,0.4); border-radius:2px;
+    display:flex; align-items:center; justify-content:center; gap:0.5rem;
+    color:rgba(246,242,234,0.55); padding:0 0.9rem;
+  }
+  .logo-placeholder svg{ flex-shrink:0; opacity:0.8; }
+  .logo-placeholder span{
+    font-size:0.72rem; letter-spacing:0.02em; line-height:1.4; text-align:left;
+  }
+  .logo-placeholder span em{
+    display:block; font-style:normal; font-size:0.64rem; color:rgba(246,242,234,0.4); margin-top:0.1rem;
+  }
+
   .hero h1{
     font-size:clamp(3rem, 8vw, 6.4rem);
     line-height:0.98;
@@ -365,6 +388,9 @@
     footer{ flex-direction:column; align-items:flex-start; }
     .hero-placeholder{ inset:10px; padding:1.2rem; }
     .hero-placeholder p{ font-size:0.78rem; }
+    .logo-slot{ width:9rem; height:3.6rem; margin-bottom:1.5rem; }
+    .logo-placeholder span{ font-size:0.62rem; }
+    .logo-placeholder span em{ font-size:0.56rem; }
     .parallax-placeholder{ inset:10px; padding:1.2rem; }
     .parallax-placeholder p{ font-size:0.74rem; }
     .gal-item{ width:12.5rem; height:16rem; }
@@ -396,6 +422,13 @@
     <div class="hero-glow"></div>
 
     <div class="hero-content">
+      <div class="logo-slot">
+        <div class="logo-placeholder">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <span>로고 이미지<em>images/church-logo.png</em></span>
+        </div>
+        <img src="images/church-logo.png" alt="빛길교회 로고" onerror="this.style.display='none'">
+      </div>
       <span class="eyebrow">매주 일요일 · 오전 11시</span>
       <h1>빛길교회</h1>
       <p class="tagline">함께 걷는 믿음의 길</p>

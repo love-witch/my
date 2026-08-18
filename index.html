@@ -275,16 +275,20 @@
     color:#fdfaf4; font-size:0.82rem; font-weight:600; letter-spacing:0.02em;
     text-shadow:0 1px 6px rgba(0,0,0,0.4);
   }
-  .gal-item:nth-child(1){ background:linear-gradient(150deg,#d9a35c,#b97a34); }
-  .gal-item:nth-child(2){ background:linear-gradient(150deg,#8a9c7e,#5f7355); }
-  .gal-item:nth-child(3){ background:linear-gradient(150deg,#46586f,#2e3a4e); }
-  .gal-item:nth-child(4){ background:linear-gradient(150deg,#c9b28a,#9c8459); }
-  .gal-item:nth-child(5){ background:linear-gradient(150deg,#7d8f9e,#4a5c6b); }
-  .gal-item:nth-child(6){ background:linear-gradient(150deg,#c68a3d,#8a9c7e); }
-  .gal-item:nth-child(7){ background:linear-gradient(150deg,#6b5b45,#3a4552); }
-  .gal-item:nth-child(8){ background:linear-gradient(150deg,#9caf8f,#c68a3d); }
-  .gal-item:nth-child(9){ background:linear-gradient(150deg,#55708a,#2e3a4e); }
-  .gal-item:nth-child(10){ background:linear-gradient(150deg,#b97a53,#8a9c7e); }
+  .gal-item:nth-child(10n+1){ background:linear-gradient(150deg,#d9a35c,#b97a34); }
+  .gal-item:nth-child(10n+2){ background:linear-gradient(150deg,#8a9c7e,#5f7355); }
+  .gal-item:nth-child(10n+3){ background:linear-gradient(150deg,#46586f,#2e3a4e); }
+  .gal-item:nth-child(10n+4){ background:linear-gradient(150deg,#c9b28a,#9c8459); }
+  .gal-item:nth-child(10n+5){ background:linear-gradient(150deg,#7d8f9e,#4a5c6b); }
+  .gal-item:nth-child(10n+6){ background:linear-gradient(150deg,#c68a3d,#8a9c7e); }
+  .gal-item:nth-child(10n+7){ background:linear-gradient(150deg,#6b5b45,#3a4552); }
+  .gal-item:nth-child(10n+8){ background:linear-gradient(150deg,#9caf8f,#c68a3d); }
+  .gal-item:nth-child(10n+9){ background:linear-gradient(150deg,#55708a,#2e3a4e); }
+  .gal-item:nth-child(10n+10){ background:linear-gradient(150deg,#b97a53,#8a9c7e); }
+
+  /* photos 6–20 stay hidden until their img loads (see onload attr on <img>) —
+     this keeps a minimum of 5 tiles visible by default, up to a max of 20 */
+  .gal-item:nth-child(n+6){ display:none; }
 
   .gal-hint-text{
     margin-top:1rem; font-size:0.8rem; color:var(--ink-soft);
@@ -449,66 +453,230 @@
     </div>
   </section>
 
-  <!-- GALLERY -->
-  <section class="section" data-tone="sage" id="gallery">
+  <!-- GALLERY 1 - WORSHIP -->
+  <section class="section" data-tone="sage" id="gallery-worship">
     <div class="gal-head reveal">
-      <span class="eyebrow">공동체 이야기</span>
-      <h2>함께한 순간들</h2>
+      <span class="eyebrow">예배 스케치</span>
+      <h2>예배의 모습</h2>
     </div>
-    <!-- 사진 갤러리(가로 스크롤): 각 타일의 img src를 실제 사진 경로로 바꾸면 자동으로 채워집니다.
-         이미지가 없으면 안내 아이콘과 캡션만 표시됩니다. 타일을 더 추가하려면
-         .gal-item 블록을 복사해 이어붙이면 됩니다 (가로 스크롤이라 개수 제한이 없습니다). -->
+    <!-- 사진 갤러리(가로 스크롤, 최대 20장): 각 타일의 img src를 실제 사진 경로로 바꾸면 자동으로 채워집니다.
+         사진이 없는 타일(6번째 이후)은 자동으로 숨겨지고, 처음 5장은 기본으로 항상 표시됩니다. -->
     <div class="gal-scroll reveal">
       <div class="gal-track">
         <div class="gal-item">
-          <div class="hint"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M13 17L16.7 13.7C17.4 13.1 18.4 13.1 19.1 13.7L21 15.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><em>이미지 추가</em></div>
-          <img src="images/gallery-1.jpg" alt="주일 예배" onerror="this.style.display='none'">
-          <span class="cap">주일 예배</span>
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-1.jpg" alt="주일 1부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">주일 1부 예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-2.jpg" alt="여름 수련회" onerror="this.style.display='none'">
-          <span class="cap">여름 수련회</span>
+          <img src="images/worship-2.jpg" alt="주일 2부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">주일 2부 예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-3.jpg" alt="새벽 기도회" onerror="this.style.display='none'">
+          <img src="images/worship-3.jpg" alt="찬양팀 리허설" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">찬양팀 리허설</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-4.jpg" alt="설교 말씀 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">설교 말씀 시간</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-5.jpg" alt="성찬식" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">성찬식</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-6.jpg" alt="예배당 전경" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">예배당 전경</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-7.jpg" alt="성가대 찬양" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">성가대 찬양</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-8.jpg" alt="봉헌 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">봉헌 시간</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-9.jpg" alt="기도의 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">기도의 시간</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-10.jpg" alt="예배 후 교제" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">예배 후 교제</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-11.jpg" alt="청년부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">청년부 예배</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-12.jpg" alt="다음세대 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">다음세대 예배</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-13.jpg" alt="새벽 기도회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">새벽 기도회</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-4.jpg" alt="소그룹 모임" onerror="this.style.display='none'">
+          <img src="images/worship-14.jpg" alt="수요 기도회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">수요 기도회</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-15.jpg" alt="특별 찬양 순서" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">특별 찬양 순서</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-16.jpg" alt="말씀 봉독" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">말씀 봉독</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-17.jpg" alt="예배 준비" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">예배 준비</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-18.jpg" alt="안내팀 섬김" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">안내팀 섬김</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-19.jpg" alt="축도" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">축도</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/worship-20.jpg" alt="예배당 야경" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">예배당 야경</span>
+        </div>
+      </div>
+    </div>
+    <p class="gal-hint-text">옆으로 스크롤하거나 드래그해서 더 많은 사진을 볼 수 있어요 →</p>
+  </section>
+
+  <!-- GALLERY 2 - MOMENTS -->
+  <section class="section" data-tone="sage" id="gallery-moments">
+    <div class="gal-head reveal">
+      <span class="eyebrow">공동체 이야기</span>
+      <h2>함께한 순간들</h2>
+    </div>
+    <!-- 사진 갤러리(가로 스크롤, 최대 20장): 각 타일의 img src를 실제 사진 경로로 바꾸면 자동으로 채워집니다.
+         사진이 없는 타일(6번째 이후)은 자동으로 숨겨지고, 처음 5장은 기본으로 항상 표시됩니다. -->
+    <div class="gal-scroll reveal">
+      <div class="gal-track">
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-1.jpg" alt="주일 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">주일 예배</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-2.jpg" alt="여름 수련회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">여름 수련회</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-3.jpg" alt="새벽 기도회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">새벽 기도회</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-4.jpg" alt="소그룹 모임" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">소그룹 모임</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-5.jpg" alt="봉사의 날" onerror="this.style.display='none'">
+          <img src="images/gallery-5.jpg" alt="봉사의 날" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">봉사의 날</span>
         </div>
         <div class="gal-item">
-          <div class="hint"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M13 17L16.7 13.7C17.4 13.1 18.4 13.1 19.1 13.7L21 15.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><em>이미지 추가</em></div>
-          <img src="images/gallery-6.jpg" alt="다음세대 캠프" onerror="this.style.display='none'">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-6.jpg" alt="다음세대 캠프" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">다음세대 캠프</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-7.jpg" alt="성탄 축하예배" onerror="this.style.display='none'">
+          <img src="images/gallery-7.jpg" alt="성탄 축하예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">성탄 축하예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-8.jpg" alt="추수감사주일" onerror="this.style.display='none'">
+          <img src="images/gallery-8.jpg" alt="추수감사주일" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">추수감사주일</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-9.jpg" alt="찬양의 밤" onerror="this.style.display='none'">
+          <img src="images/gallery-9.jpg" alt="찬양의 밤" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">찬양의 밤</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/gallery-10.jpg" alt="가족 사진관" onerror="this.style.display='none'">
+          <img src="images/gallery-10.jpg" alt="가족 사진관" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">가족 사진관</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-11.jpg" alt="부활절 행사" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">부활절 행사</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-12.jpg" alt="청년부 수련회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">청년부 수련회</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-13.jpg" alt="야외 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">야외 예배</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-14.jpg" alt="지역 봉사활동" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">지역 봉사활동</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-15.jpg" alt="교회 창립기념일" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">교회 창립기념일</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-16.jpg" alt="어린이날 행사" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">어린이날 행사</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-17.jpg" alt="여름 성경학교" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">여름 성경학교</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-18.jpg" alt="임직식" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">임직식</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-19.jpg" alt="송년의 밤" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">송년의 밤</span>
+        </div>
+        <div class="gal-item">
+          <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
+          <img src="images/gallery-20.jpg" alt="신년 특별새벽기도회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <span class="cap">신년 특별새벽기도회</span>
         </div>
       </div>
     </div>

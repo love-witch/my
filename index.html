@@ -261,6 +261,51 @@
   .time-row .name small{ display:block; font-family:var(--body); font-size:0.82rem; color:var(--ink-soft); font-weight:400; margin-top:0.2rem;}
   .time-row .time{ font-family:var(--body); font-weight:600; font-size:1.05rem; color:var(--dusk); white-space:nowrap; }
 
+  /* ---------- sermon video ---------- */
+  .sermon-wrap{ max-width:52rem; margin:0 auto; width:100%; }
+  .sermon-head{ margin-bottom:2.4rem; max-width:36rem; }
+  .sermon-head h2{ font-size:clamp(2.2rem,4vw,3rem); margin-bottom:1rem; }
+  .sermon-head p{ color:var(--ink-soft); font-size:1rem; }
+  .video-frame{
+    position:relative; width:100%; aspect-ratio:16/9;
+    background:var(--dusk); border-radius:3px; overflow:hidden;
+    box-shadow:0 20px 50px rgba(38,36,31,0.18);
+  }
+  .video-frame iframe{
+    position:absolute; inset:0; width:100%; height:100%; border:0; display:block;
+  }
+  .video-placeholder{
+    position:absolute; inset:0; z-index:1;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:1rem; text-align:center; padding:2rem;
+    color:rgba(246,242,234,0.62);
+  }
+  .video-placeholder .play-badge{
+    width:4rem; height:4rem; border-radius:50%;
+    border:1.5px solid rgba(246,242,234,0.4);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .video-placeholder p{ font-size:0.85rem; letter-spacing:0.02em; line-height:1.7; max-width:26rem; }
+  .video-placeholder code{
+    display:inline-block; margin-top:0.4rem; font-size:0.76rem;
+    color:rgba(246,242,234,0.42); word-break:break-all;
+  }
+  .sermon-meta{
+    display:flex; flex-wrap:wrap; gap:1.6rem;
+    margin-top:1.6rem; padding-top:1.4rem;
+    border-top:1px solid var(--line);
+  }
+  .sermon-meta div{ font-size:0.92rem; }
+  .sermon-meta .label{
+    display:block; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:0.3rem;
+  }
+  @media (max-width:560px){
+    .video-placeholder{ padding:1.2rem; }
+    .video-placeholder p{ font-size:0.78rem; }
+    .video-placeholder .play-badge{ width:3.2rem; height:3.2rem; }
+  }
+
   /* ---------- ministries ---------- */
   .min-head{ margin-bottom:3.2rem; max-width:34rem; }
   .min-head h2{ font-size:clamp(2.2rem,4vw,3rem); }
@@ -611,6 +656,43 @@
       <div class="quote-block reveal">
         <p>"내가 세상의 빛이니 나를 따르는 자는 어둠에 다니지 아니하고 생명의 빛을 얻으리라"</p>
         <span>요한복음 8장 12절 中</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERMON VIDEO -->
+  <!-- 설교 영상 섹션: 아래 .video-frame의 data-youtube-url 값을 유튜브 영상 링크로 바꿔주세요.
+       watch?v=, youtu.be/, shorts/, embed/ 형태의 링크를 모두 붙여넣을 수 있습니다.
+       예: https://www.youtube.com/watch?v=dQw4w9WgXcQ  또는  https://youtu.be/dQw4w9WgXcQ
+       링크를 넣지 않으면 아래처럼 안내 placeholder가 표시됩니다. -->
+  <section class="section" data-tone="dawn" id="sermon">
+    <div class="sermon-wrap">
+      <div class="sermon-head reveal">
+        <span class="eyebrow">말씀과 함께</span>
+        <h2>이번 주 설교</h2>
+        <p>예배에 참석하지 못하셨거나 다시 듣고 싶으신 말씀을 이곳에서 시청하실 수 있습니다.</p>
+      </div>
+      <div class="video-frame reveal" id="sermonVideo" data-youtube-url="">
+        <div class="video-placeholder">
+          <div class="play-badge">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 7.5L17 12L9 16.5V7.5Z" fill="currentColor"/></svg>
+          </div>
+          <p>설교 영상 영역<br>위 data-youtube-url 속성에 유튜브 링크를 붙여넣어주세요<code>예: https://www.youtube.com/watch?v=VIDEO_ID</code></p>
+        </div>
+      </div>
+      <div class="sermon-meta reveal">
+        <div>
+          <span class="label">설교 제목</span>
+          <span>빛 가운데로 걷는 삶</span>
+        </div>
+        <div>
+          <span class="label">본문 말씀</span>
+          <span>요한복음 8장 12절</span>
+        </div>
+        <div>
+          <span class="label">설교자</span>
+          <span>담임목사</span>
+        </div>
       </div>
     </div>
   </section>
@@ -1422,6 +1504,40 @@
       if (e.key === 'ArrowLeft') stepMinistry(-1);
       if (e.key === 'ArrowRight') stepMinistry(1);
     });
+  })();
+
+  // ---------- 설교 영상(유튜브 임베드) ----------
+  (function(){
+    const videoFrame = document.getElementById('sermonVideo');
+    if (!videoFrame) return;
+
+    function extractYouTubeId(url){
+      if (!url) return null;
+      const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtube\.com\/live\/|youtube\.com\/shorts\/|youtube\.com\/embed\/|youtu\.be\/)([\w-]{11})/
+      ];
+      for (const pattern of patterns){
+        const match = url.match(pattern);
+        if (match) return match[1];
+      }
+      return null;
+    }
+
+    const rawUrl = videoFrame.dataset.youtubeUrl ? videoFrame.dataset.youtubeUrl.trim() : '';
+    const videoId = extractYouTubeId(rawUrl);
+
+    if (videoId){
+      videoFrame.innerHTML = '';
+      const iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?rel=0';
+      iframe.title = '설교 영상';
+      iframe.loading = 'lazy';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.allowFullscreen = true;
+      videoFrame.appendChild(iframe);
+    }
+    // videoId가 없으면(링크를 아직 넣지 않았으면) HTML에 있는 placeholder가 그대로 표시됩니다.
   })();
 </script>
 

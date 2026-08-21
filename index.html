@@ -34,7 +34,7 @@
     overflow-x:hidden;
   }
 
-  @media (prefers-reduced-motion: xreduce){
+  @media (prefers-reduced-motion: reduce){
     html{ scroll-behavior:auto; }
     *{ animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
   }
@@ -355,6 +355,16 @@
     max-width:100%; max-height:78vh; object-fit:contain;
     border-radius:2px; box-shadow:0 20px 60px rgba(0,0,0,0.5);
     background:#111;
+    cursor:grab;
+    user-select:none; -webkit-user-select:none;
+    touch-action:pan-y;
+  }
+  .lightbox-figure img.is-dragging{
+    cursor:grabbing;
+    transition:none !important;
+  }
+  .lightbox-figure img.is-settling{
+    transition:transform 0.25s ease;
   }
   .lightbox-cap{
     margin-top:1rem; color:#f3ede1; font-size:0.9rem; letter-spacing:0.02em;
@@ -580,42 +590,42 @@
       <div class="gal-track" data-gallery="worship">
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img01.jpg" alt="주일 1부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-1.jpg" alt="주일 1부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">주일 1부 예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img02.jpg" alt="주일 2부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-2.jpg" alt="주일 2부 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">주일 2부 예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img03.jpg" alt="찬양팀 리허설" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-3.jpg" alt="찬양팀 리허설" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">찬양팀 리허설</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img04.jpg" alt="설교 말씀 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-4.jpg" alt="설교 말씀 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">설교 말씀 시간</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img01.jpg" alt="성찬식" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-5.jpg" alt="성찬식" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">성찬식</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img02.jpg" alt="예배당 전경" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-6.jpg" alt="예배당 전경" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">예배당 전경</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img03.jpg" alt="성가대 찬양" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-7.jpg" alt="성가대 찬양" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">성가대 찬양</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img04.jpg" alt="봉헌 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/worship-8.jpg" alt="봉헌 시간" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">봉헌 시간</span>
         </div>
         <div class="gal-item">
@@ -693,42 +703,42 @@
       <div class="gal-track" data-gallery="moments">
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img01.jpg" alt="주일 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-1.jpg" alt="주일 예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">주일 예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img02.jpg" alt="여름 수련회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-2.jpg" alt="여름 수련회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">여름 수련회</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img03.jpg" alt="새벽 기도회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-3.jpg" alt="새벽 기도회" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">새벽 기도회</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img04.jpg" alt="소그룹 모임" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-4.jpg" alt="소그룹 모임" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">소그룹 모임</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img01.jpg" alt="봉사의 날" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-5.jpg" alt="봉사의 날" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">봉사의 날</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img02.jpg" alt="다음세대 캠프" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-6.jpg" alt="다음세대 캠프" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">다음세대 캠프</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img03.jpg" alt="성탄 축하예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-7.jpg" alt="성탄 축하예배" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">성탄 축하예배</span>
         </div>
         <div class="gal-item">
           <div class="hint"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg></div>
-          <img src="images/img04.jpg" alt="추수감사주일" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
+          <img src="images/gallery-8.jpg" alt="추수감사주일" onload="this.parentElement.style.display='flex'" onerror="this.style.display='none'">
           <span class="cap">추수감사주일</span>
         </div>
         <div class="gal-item">
@@ -989,6 +999,8 @@
       lightboxImg.src = img.src;
       lightboxImg.alt = img.alt || '';
       lightboxCap.textContent = cap ? cap.textContent : '';
+      lightboxImg.style.transform = '';
+      lightboxImg.style.opacity = '';
       currentIndex = index;
     }
 
@@ -1035,6 +1047,106 @@
       if (e.key === 'Escape') closeLightbox();
       if (e.key === 'ArrowLeft') showPrev();
       if (e.key === 'ArrowRight') showNext();
+    });
+
+    // ---------- 좌우 드래그(스와이프)로 사진 넘기기 ----------
+    let dragActive = false;
+    let dragMoved = false;
+    let startX = 0;
+    let startY = 0;
+    let currentDx = 0;
+    const SWIPE_THRESHOLD = 60; // 이 값(px) 이상 드래그해야 사진이 넘어감
+
+    function dragStart(clientX, clientY){
+      dragActive = true;
+      dragMoved = false;
+      startX = clientX;
+      startY = clientY;
+      currentDx = 0;
+      lightboxImg.classList.remove('is-settling');
+      lightboxImg.classList.add('is-dragging');
+    }
+
+    function dragMove(clientX, clientY){
+      if (!dragActive) return;
+      const dx = clientX - startX;
+      const dy = clientY - startY;
+      // 세로 스크롤 의도가 더 크면 드래그로 취급하지 않음
+      if (!dragMoved && Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+      dragMoved = true;
+      currentDx = dx;
+      const fade = Math.max(0, 1 - Math.abs(dx) / 400);
+      lightboxImg.style.transform = 'translateX(' + dx + 'px)';
+      lightboxImg.style.opacity = String(0.6 + 0.4 * fade);
+    }
+
+    function dragEnd(){
+      if (!dragActive) return;
+      dragActive = false;
+      lightboxImg.classList.remove('is-dragging');
+      lightboxImg.classList.add('is-settling');
+
+      if (dragMoved && Math.abs(currentDx) > SWIPE_THRESHOLD){
+        // 왼쪽으로 드래그(dx < 0) → 다음 사진, 오른쪽으로 드래그(dx > 0) → 이전 사진
+        const goingNext = currentDx < 0;
+        lightboxImg.style.transform = 'translateX(' + (goingNext ? '-40px' : '40px') + ')';
+        lightboxImg.style.opacity = '0';
+        setTimeout(() => {
+          if (goingNext) showNext(); else showPrev();
+          lightboxImg.classList.remove('is-settling');
+          lightboxImg.style.transform = 'translateX(0)';
+          lightboxImg.style.opacity = '1';
+        }, 150);
+      } else {
+        // 임계값 못 넘으면 제자리로 복귀
+        lightboxImg.style.transform = 'translateX(0)';
+        lightboxImg.style.opacity = '1';
+      }
+      dragMoved = false;
+    }
+
+    // 마우스(포인터) 드래그
+    lightboxImg.addEventListener('pointerdown', (e) => {
+      e.preventDefault();
+      dragStart(e.clientX, e.clientY);
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (!dragActive) return;
+      dragMove(e.clientX, e.clientY);
+    });
+    window.addEventListener('pointerup', () => {
+      if (dragActive) dragEnd();
+    });
+    window.addEventListener('pointercancel', () => {
+      if (dragActive) dragEnd();
+    });
+
+    // 터치 드래그 (일부 브라우저 호환을 위해 포인터 이벤트와 함께 유지)
+    lightboxImg.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      dragStart(t.clientX, t.clientY);
+    }, { passive:true });
+    lightboxImg.addEventListener('touchmove', (e) => {
+      if (!dragActive) return;
+      const t = e.touches[0];
+      dragMove(t.clientX, t.clientY);
+      if (dragMoved) e.preventDefault(); // 가로 드래그가 확정되면 페이지 스크롤 방지
+    }, { passive:false });
+    lightboxImg.addEventListener('touchend', () => {
+      if (dragActive) dragEnd();
+    });
+
+    // 라이트박스가 닫힐 때 드래그 상태/스타일 초기화
+    const resetDragStyles = () => {
+      lightboxImg.classList.remove('is-dragging', 'is-settling');
+      lightboxImg.style.transform = '';
+      lightboxImg.style.opacity = '';
+      dragActive = false;
+      dragMoved = false;
+    };
+    closeBtn.addEventListener('click', resetDragStyles);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') resetDragStyles();
     });
   })();
 </script>

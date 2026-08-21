@@ -268,10 +268,21 @@
   .min-card{
     background:var(--paper); border:1px solid var(--line); padding:1.8rem 1.5rem;
     transition:border-color 0.3s ease, transform 0.3s ease;
+    cursor:pointer; position:relative;
   }
   .min-card:hover{ border-color:var(--sage); transform:translateY(-4px); }
   .min-card h3{ font-size:1.15rem; margin-bottom:0.6rem; }
   .min-card p{ font-size:0.9rem; color:var(--ink-soft); }
+  .min-card .more{
+    display:inline-flex; align-items:center; gap:0.35rem;
+    margin-top:1rem; font-size:0.78rem; font-weight:600;
+    letter-spacing:0.04em; color:var(--sage);
+    opacity:0; transform:translateY(4px);
+    transition:opacity 0.25s ease, transform 0.25s ease;
+  }
+  .min-card:hover .more{ opacity:1; transform:translateY(0); }
+  .min-card .more svg{ transition:transform 0.25s ease; }
+  .min-card:hover .more svg{ transform:translateX(3px); }
 
   /* ---------- gallery (horizontal scroll) ---------- */
   .gal-head{ margin-bottom:2.4rem; max-width:34rem; }
@@ -393,6 +404,89 @@
     .lightbox-close{ top:-2.6rem; right:0; }
     .lightbox-prev{ left:0.4rem; }
     .lightbox-next{ right:0.4rem; }
+  }
+
+  /* ---------- ministry detail modal ---------- */
+  .min-modal{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(20,18,14,0.72);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden;
+    transition:opacity 0.3s ease, visibility 0.3s ease;
+    padding:2rem;
+  }
+  .min-modal.is-open{ opacity:1; visibility:visible; }
+  .min-modal-panel{
+    position:relative; width:100%; max-width:720px; max-height:88vh;
+    overflow-y:auto;
+    background:var(--paper);
+    border-radius:3px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.35);
+    padding:3.2rem 3rem;
+    transform:translateY(18px) scale(0.98); opacity:0;
+    transition:transform 0.35s ease, opacity 0.35s ease;
+  }
+  .min-modal.is-open .min-modal-panel{ transform:translateY(0) scale(1); opacity:1; }
+  .min-modal-close{
+    position:absolute; top:1.4rem; right:1.4rem;
+    width:2.4rem; height:2.4rem; border-radius:50%;
+    background:transparent; border:1px solid var(--line);
+    color:var(--ink-soft); font-size:1.2rem; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  }
+  .min-modal-close:hover{ background:var(--paper-dim); border-color:var(--gold); color:var(--ink); }
+  .min-modal-eyebrow{
+    font-family:var(--body); font-weight:600; font-size:0.76rem;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--gold);
+    display:block; margin-bottom:1rem;
+  }
+  .min-modal-panel h3{
+    font-family:var(--display); font-size:clamp(1.8rem,3.2vw,2.4rem);
+    margin-bottom:0.6rem; padding-right:2.4rem;
+  }
+  .min-modal-tagline{
+    font-family:var(--display); font-style:italic; font-size:1.1rem;
+    color:var(--ink-soft); margin-bottom:1.8rem;
+  }
+  .min-modal-meta{
+    display:grid; grid-template-columns:1fr 1fr; gap:1rem;
+    margin-bottom:1.8rem; padding:1.2rem 0;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .min-modal-meta div{ font-size:0.9rem; }
+  .min-modal-meta .label{
+    display:block; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--ink-soft); margin-bottom:0.3rem;
+  }
+  .min-modal-body p{ color:var(--ink-soft); font-size:0.98rem; margin-bottom:1rem; }
+  .min-modal-list{ list-style:none; margin-top:1.2rem; }
+  .min-modal-list li{
+    display:flex; gap:0.7rem; padding:0.6rem 0;
+    border-bottom:1px solid var(--line);
+    font-size:0.92rem; color:var(--ink);
+  }
+  .min-modal-list li::before{
+    content:''; flex-shrink:0; width:6px; height:6px; margin-top:0.5rem;
+    border-radius:50%; background:var(--sage);
+  }
+  .min-modal-nav{
+    display:flex; justify-content:space-between; align-items:center;
+    margin-top:2.2rem; padding-top:1.4rem; border-top:1px solid var(--line);
+  }
+  .min-modal-nav button{
+    display:flex; align-items:center; gap:0.5rem;
+    background:none; border:none; cursor:pointer;
+    font-family:var(--body); font-weight:600; font-size:0.85rem;
+    color:var(--ink-soft); transition:color 0.25s ease;
+    padding:0.4rem;
+  }
+  .min-modal-nav button:hover{ color:var(--gold); }
+  .min-modal-nav button.next-min{ margin-left:auto; }
+  @media (max-width:560px){
+    .min-modal{ padding:0; }
+    .min-modal-panel{ max-width:100%; height:100%; max-height:100%; border-radius:0; padding:4rem 1.6rem 2.4rem; }
+    .min-modal-meta{ grid-template-columns:1fr; }
   }
 
   /* ---------- visit ---------- */
@@ -561,21 +655,25 @@
       <h2>이런 모임들이 있어요</h2>
     </div>
     <div class="min-grid">
-      <div class="min-card reveal">
+      <div class="min-card reveal" data-ministry="new-family" tabindex="0" role="button" aria-haspopup="dialog">
         <h3>새가족부</h3>
         <p>처음 오신 분들이 교회 공동체에 편하게 적응하도록 돕습니다.</p>
+        <span class="more">자세히 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
-      <div class="min-card reveal">
+      <div class="min-card reveal" data-ministry="youth" tabindex="0" role="button" aria-haspopup="dialog">
         <h3>청년부</h3>
         <p>20~30대가 신앙과 일상의 고민을 함께 나누는 모임입니다.</p>
+        <span class="more">자세히 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
-      <div class="min-card reveal">
+      <div class="min-card reveal" data-ministry="next-gen" tabindex="0" role="button" aria-haspopup="dialog">
         <h3>다음세대</h3>
         <p>유아부터 중고등부까지, 눈높이에 맞춘 신앙 교육을 진행합니다.</p>
+        <span class="more">자세히 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
-      <div class="min-card reveal">
+      <div class="min-card reveal" data-ministry="small-group" tabindex="0" role="button" aria-haspopup="dialog">
         <h3>소그룹 모임</h3>
         <p>지역과 상황에 맞춰 모이는 소그룹으로 서로의 삶에 가까이 다가갑니다.</p>
+        <span class="more">자세히 보기 <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </div>
   </section>
@@ -899,6 +997,40 @@
     </div>
   </div>
 
+  <!-- MINISTRY DETAIL MODAL: 사역소개 박스 클릭 시 상세내용을 크게 보여주는 모달 -->
+  <div class="min-modal" id="minModal" role="dialog" aria-modal="true" aria-label="사역 상세 정보">
+    <div class="min-modal-panel">
+      <button class="min-modal-close" id="minModalClose" aria-label="닫기">&times;</button>
+      <span class="min-modal-eyebrow" id="minModalEyebrow">사역 소개</span>
+      <h3 id="minModalTitle"></h3>
+      <p class="min-modal-tagline" id="minModalTagline"></p>
+      <div class="min-modal-meta">
+        <div>
+          <span class="label">모이는 시간</span>
+          <span id="minModalTime"></span>
+        </div>
+        <div>
+          <span class="label">대상</span>
+          <span id="minModalTarget"></span>
+        </div>
+      </div>
+      <div class="min-modal-body">
+        <p id="minModalDesc"></p>
+        <ul class="min-modal-list" id="minModalList"></ul>
+      </div>
+      <div class="min-modal-nav">
+        <button type="button" class="prev-min" id="minModalPrev">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          이전 사역
+        </button>
+        <button type="button" class="next-min" id="minModalNext">
+          다음 사역
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
 <script>
   // respect reduced-motion: pause the background video for users who prefer less motion
   const heroVideo = document.querySelector('.hero-video');
@@ -1147,6 +1279,148 @@
     closeBtn.addEventListener('click', resetDragStyles);
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') resetDragStyles();
+    });
+  })();
+
+  // ---------- 사역소개 상세 모달 ----------
+  (function(){
+    const ministryData = {
+      'new-family': {
+        eyebrow: '새가족부',
+        title: '새가족부',
+        tagline: '처음 오신 분도 마음 편히 앉으실 수 있도록',
+        time: '주일 1부·2부 예배 후, 새가족실',
+        target: '처음 방문하신 모든 분',
+        desc: '빛길교회를 처음 찾아주신 분들이 낯설지 않게, 교회 공동체에 자연스럽게 스며들 수 있도록 돕는 사역입니다. 예배 후 따뜻한 차 한 잔과 함께 교회를 소개하고, 궁금한 점을 편하게 나눌 수 있는 자리를 마련합니다.',
+        list: [
+          '예배 직후 새가족실에서 담당 교역자와 인사 나누기',
+          '4주 과정의 새가족 양육 프로그램 운영',
+          '또래·연령대에 맞는 소그룹 연결 지원',
+          '교회 시설 및 주요 사역 안내 자료 제공'
+        ]
+      },
+      'youth': {
+        eyebrow: '청년부',
+        title: '청년부',
+        tagline: '20~30대, 신앙과 일상을 함께 잇다',
+        time: '주일 오후 1:30, 2층 예배실',
+        target: '20~30대 청년',
+        desc: '취업, 관계, 미래에 대한 고민이 많은 시기, 혼자 감당하지 않도록 함께 걷는 청년 공동체입니다. 예배와 나눔, 그리고 평일 소모임을 통해 신앙과 삶이 자연스럽게 연결되도록 돕습니다.',
+        list: [
+          '주일 오후 청년 예배 및 찬양팀 운영',
+          '월 2회 소그룹 나눔 모임(스터디·취미 연계)',
+          '분기별 청년 수련회 및 봉사활동',
+          '취업·진로 고민을 나누는 멘토링 자리 마련'
+        ]
+      },
+      'next-gen': {
+        eyebrow: '다음세대',
+        title: '다음세대',
+        tagline: '유아부터 중고등부까지, 눈높이에 맞춘 신앙 교육',
+        time: '주일 1부 예배 시간, 교육관',
+        target: '영유아부터 중고등부 학생',
+        desc: '가장 소중한 다음세대가 눈높이에 맞는 방식으로 하나님을 만나도록 돕는 사역입니다. 연령별 눈높이 교육과정을 통해 성경적 가치관과 신앙의 기초를 함께 세워갑니다.',
+        list: [
+          '영유아부·유치부·초등부·중고등부 연령별 예배 운영',
+          '성경 이야기 중심의 눈높이 공과 교육',
+          '여름 성경학교·겨울 캠프 등 계절 프로그램',
+          '학부모와 함께하는 가정 신앙교육 자료 제공'
+        ]
+      },
+      'small-group': {
+        eyebrow: '소그룹 모임',
+        title: '소그룹 모임',
+        tagline: '삶을 나누는 가장 작은 공동체',
+        time: '매주 평일 저녁, 각 가정 및 카페',
+        target: '전 성도 (지역·상황별 배정)',
+        desc: '큰 예배당에서 나누기 어려운 삶의 이야기를, 편안한 소그룹 안에서 나눕니다. 지역과 생활 패턴에 맞춰 모이기 때문에 부담 없이 참여할 수 있고, 서로의 일상에 가까이 다가가는 관계가 만들어집니다.',
+        list: [
+          '지역 기반 소그룹 및 직장인 저녁 소그룹 운영',
+          '말씀 나눔과 기도 제목을 함께 나누는 시간',
+          '신입 성도를 위한 소그룹 매칭 안내',
+          '분기별 소그룹 연합 모임 및 봉사 프로젝트'
+        ]
+      }
+    };
+    const order = ['new-family', 'youth', 'next-gen', 'small-group'];
+
+    const minModal = document.getElementById('minModal');
+    const minModalClose = document.getElementById('minModalClose');
+    const minModalEyebrow = document.getElementById('minModalEyebrow');
+    const minModalTitle = document.getElementById('minModalTitle');
+    const minModalTagline = document.getElementById('minModalTagline');
+    const minModalTime = document.getElementById('minModalTime');
+    const minModalTarget = document.getElementById('minModalTarget');
+    const minModalDesc = document.getElementById('minModalDesc');
+    const minModalList = document.getElementById('minModalList');
+    const minModalPrev = document.getElementById('minModalPrev');
+    const minModalNext = document.getElementById('minModalNext');
+    const minModalPanel = document.querySelector('.min-modal-panel');
+
+    let currentMinKey = null;
+
+    function renderMinistry(key){
+      const data = ministryData[key];
+      if (!data) return;
+      currentMinKey = key;
+      minModalEyebrow.textContent = data.eyebrow;
+      minModalTitle.textContent = data.title;
+      minModalTagline.textContent = data.tagline;
+      minModalTime.textContent = data.time;
+      minModalTarget.textContent = data.target;
+      minModalDesc.textContent = data.desc;
+      minModalList.innerHTML = '';
+      data.list.forEach(itemText => {
+        const li = document.createElement('li');
+        li.textContent = itemText;
+        minModalList.appendChild(li);
+      });
+      if (minModalPanel) minModalPanel.scrollTop = 0;
+    }
+
+    function openMinModal(key){
+      renderMinistry(key);
+      minModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMinModal(){
+      minModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    function stepMinistry(delta){
+      if (!currentMinKey) return;
+      const idx = order.indexOf(currentMinKey);
+      const nextIdx = (idx + delta + order.length) % order.length;
+      renderMinistry(order[nextIdx]);
+    }
+
+    document.querySelectorAll('.min-card').forEach(card => {
+      const key = card.dataset.ministry;
+      if (!key) return;
+      card.addEventListener('click', () => openMinModal(key));
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          openMinModal(key);
+        }
+      });
+    });
+
+    minModalClose.addEventListener('click', closeMinModal);
+    minModalPrev.addEventListener('click', () => stepMinistry(-1));
+    minModalNext.addEventListener('click', () => stepMinistry(1));
+
+    minModal.addEventListener('click', (e) => {
+      if (e.target === minModal) closeMinModal(); // 바깥 영역 클릭 시 닫기
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!minModal.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeMinModal();
+      if (e.key === 'ArrowLeft') stepMinistry(-1);
+      if (e.key === 'ArrowRight') stepMinistry(1);
     });
   })();
 </script>

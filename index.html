@@ -1299,17 +1299,36 @@
   }
 
   // parallax background images (welcome / ministries / times)
+  // 모바일/태블릿에서는 섹션 안 콘텐츠가 세로로 쌓이며 뷰포트보다 훨씬 길어지고,
+  // 주소창이 늘었다 줄었다 하며 높이도 계속 바뀌기 때문에, 기존 계산식대로 이동시키면
+  // 이미지의 여유 영역(위/아래 16%)을 넘어서면서 배경 아래쪽에 빈 공간이 드러났습니다.
+  // → 일정 너비 이하에서는 패럴렉스 이동을 아예 끄고(정지된 배경), 데스크톱에서도
+  //   이미지 여유 범위를 절대 넘지 않도록 이동값을 클램프(제한)해서 빈 공간이 생기지 않게 했습니다.
   const parallaxImgs = document.querySelectorAll('.parallax-layer img');
+  const parallaxDisabledQuery = window.matchMedia('(max-width: 900px)');
+
   function updateParallax(){
+    const disableParallax = parallaxDisabledQuery.matches;
     parallaxImgs.forEach(img => {
+      if (disableParallax){
+        img.style.transform = ''; // 모바일: 이동 없이 고정된 배경으로 표시
+        return;
+      }
       const rect = img.parentElement.getBoundingClientRect();
-      const offset = (rect.top - window.innerHeight / 2) * 0.18;
+      const maxOffset = rect.height * 0.14; // 이미지 여유(16%)보다 약간 작게 잡아 안전 마진 확보
+      let offset = (rect.top - window.innerHeight / 2) * 0.18;
+      offset = Math.max(-maxOffset, Math.min(maxOffset, offset));
       img.style.transform = 'translateY(' + offset + 'px)';
     });
   }
   if (parallaxImgs.length && !prefersReducedMotion){
     window.addEventListener('scroll', () => requestAnimationFrame(updateParallax), { passive:true });
     window.addEventListener('resize', updateParallax);
+    if (parallaxDisabledQuery.addEventListener){
+      parallaxDisabledQuery.addEventListener('change', updateParallax);
+    } else if (parallaxDisabledQuery.addListener){
+      parallaxDisabledQuery.addListener(updateParallax); // 구형 사파리 호환
+    }
     updateParallax();
   }
 
@@ -1324,6 +1343,7 @@
     const trackHeight = window.innerHeight - 10;
     marker.style.transform = 'translateY(' + (fraction * trackHeight) + 'px)';
   }
+
   window.addEventListener('scroll', onScroll, { passive:true });
   onScroll();
 

@@ -534,6 +534,124 @@
     .min-modal-meta{ grid-template-columns:1fr; }
   }
 
+  /* ---------- bulletin (주보) link + modal ---------- */
+  .bulletin-link{
+    display:inline-flex; align-items:center; gap:0.4rem;
+    margin-top:1.4rem; font-family:var(--body); font-weight:600; font-size:0.9rem;
+    color:var(--dusk); text-decoration:none; cursor:pointer;
+    border-bottom:1px solid var(--dusk); padding-bottom:2px;
+    transition:color 0.25s ease, border-color 0.25s ease;
+  }
+  .bulletin-link:hover{ color:var(--gold); border-color:var(--gold); }
+  .bulletin-link svg{ transition:transform 0.25s ease; }
+  .bulletin-link:hover svg{ transform:translateX(3px); }
+
+  .bulletin-modal{
+    position:fixed; inset:0; z-index:200;
+    background:rgba(20,18,14,0.92);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden;
+    transition:opacity 0.3s ease, visibility 0.3s ease;
+    padding:2rem;
+  }
+  .bulletin-modal.is-open{ opacity:1; visibility:visible; }
+  .bulletin-figure{
+    position:relative; max-width:min(90vw,560px); max-height:88vh;
+    display:flex; flex-direction:column; align-items:center;
+    transform:scale(0.96); transition:transform 0.3s ease;
+  }
+  .bulletin-modal.is-open .bulletin-figure{ transform:scale(1); }
+  .bulletin-figure img{
+    max-width:100%; max-height:80vh; object-fit:contain;
+    border-radius:2px; box-shadow:0 20px 60px rgba(0,0,0,0.5);
+    background:#fdfaf4;
+  }
+  .bulletin-placeholder{
+    width:min(90vw,420px); aspect-ratio:3/4;
+    border:1.5px dashed rgba(246,242,234,0.35); border-radius:2px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:0.9rem; text-align:center; padding:2rem;
+    color:rgba(246,242,234,0.55);
+  }
+  .bulletin-placeholder p{ font-size:0.82rem; letter-spacing:0.02em; line-height:1.7; }
+  .bulletin-placeholder code{ display:block; margin-top:0.3rem; font-size:0.72rem; color:rgba(246,242,234,0.4); word-break:break-all; }
+  .bulletin-cap{
+    margin-top:1rem; color:#f3ede1; font-size:0.9rem; letter-spacing:0.02em; text-align:center;
+  }
+  .bulletin-nav-hidden{ display:none !important; }
+
+  /* ---------- site popup (오늘 하루 보지 않기 팝업) ---------- */
+  .site-popup{
+    position:fixed; inset:0; z-index:300;
+    background:rgba(20,18,14,0.75);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; visibility:hidden;
+    transition:opacity 0.3s ease, visibility 0.3s ease;
+    padding:1.6rem;
+  }
+  .site-popup.is-open{ opacity:1; visibility:visible; }
+  .site-popup-panel{
+    position:relative; width:100%; max-width:400px;
+    background:var(--paper); border-radius:4px; overflow:hidden;
+    box-shadow:0 30px 70px rgba(0,0,0,0.35);
+    transform:translateY(16px) scale(0.98); opacity:0;
+    transition:transform 0.35s ease, opacity 0.35s ease;
+  }
+  .site-popup.is-open .site-popup-panel{ transform:translateY(0) scale(1); opacity:1; }
+  .site-popup-close{
+    position:absolute; top:0.7rem; right:0.7rem; z-index:2;
+    width:2.2rem; height:2.2rem; border-radius:50%;
+    background:rgba(20,18,14,0.4); border:1px solid rgba(246,242,234,0.4);
+    color:#fdfaf4; font-size:1.1rem; line-height:1;
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; transition:background 0.25s ease;
+  }
+  .site-popup-close:hover{ background:rgba(20,18,14,0.6); }
+  .site-popup-image{
+    position:relative; width:100%; aspect-ratio:4/3;
+    background:var(--dusk); overflow:hidden;
+  }
+  .site-popup-image img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block;
+  }
+  .site-popup-image .placeholder{
+    position:absolute; inset:12px; z-index:0;
+    border:1.5px dashed rgba(246,242,234,0.32);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:0.6rem; text-align:center; padding:1.4rem;
+    color:rgba(246,242,234,0.55);
+  }
+  .site-popup-image .placeholder p{ font-size:0.76rem; line-height:1.6; }
+  .site-popup-body{ padding:1.7rem 1.6rem 1.5rem; }
+  .site-popup-body .eyebrow{ margin-bottom:0.7rem; }
+  .site-popup-body h3{ font-family:var(--display); font-size:1.4rem; margin-bottom:0.6rem; }
+  .site-popup-body p{ color:var(--ink-soft); font-size:0.9rem; margin-bottom:1.5rem; line-height:1.65; }
+  .site-popup-actions{
+    display:flex; justify-content:space-between; align-items:center; gap:1rem; flex-wrap:wrap;
+  }
+  .site-popup-hide{
+    background:none; border:none; padding:0; cursor:pointer;
+    font-family:var(--body); font-size:0.82rem; color:var(--ink-soft);
+    text-decoration:underline; text-underline-offset:3px;
+    transition:color 0.25s ease;
+  }
+  .site-popup-hide:hover{ color:var(--gold); }
+
+  .site-popup-reopen{
+    position:fixed; right:1.4rem; bottom:1.4rem; z-index:60;
+    background:var(--ink); color:var(--paper); border:none; border-radius:999px;
+    padding:0.7rem 1.1rem; font-family:var(--body); font-weight:600; font-size:0.78rem; letter-spacing:0.02em;
+    display:flex; align-items:center; gap:0.5rem; cursor:pointer;
+    box-shadow:0 10px 24px rgba(38,36,31,0.25);
+    transition:transform 0.25s ease, background 0.25s ease;
+    opacity:0; visibility:hidden; transform:translateY(8px);
+  }
+  .site-popup-reopen.is-visible{ opacity:1; visibility:visible; transform:translateY(0); }
+  .site-popup-reopen:hover{ background:var(--gold); transform:translateY(-2px); }
+  @media (max-width:560px){
+    .site-popup-reopen{ right:1rem; bottom:1rem; padding:0.6rem 0.9rem; font-size:0.72rem; }
+  }
+
   /* ---------- visit ---------- */
   .visit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:4.5rem; align-items:center; }
   .visit-grid h2{ font-size:clamp(2.2rem,4vw,3rem); margin-bottom:1.4rem; }
@@ -1023,6 +1141,14 @@
           <span class="time">오전 5:30</span>
         </div>
       </div>
+      <!-- 주보 링크: 클릭 시 모달팝업으로 주보 이미지를 보여줍니다.
+           아래 스크립트의 bulletinImages 배열에 실제 주보 이미지 경로를 넣어주세요. -->
+      <div class="reveal">
+        <a href="#" class="bulletin-link" id="bulletinLink">
+          이번 주 주보 보기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1112,6 +1238,55 @@
       </div>
     </div>
   </div>
+
+  <!-- 주보(BULLETIN) 모달: 예배안내 섹션의 "이번 주 주보 보기" 링크 클릭 시 뜨는 이미지 모달 -->
+  <div class="bulletin-modal" id="bulletinModal" role="dialog" aria-modal="true" aria-label="주보 크게 보기">
+    <div class="bulletin-figure">
+      <button class="lightbox-close" id="bulletinClose" aria-label="닫기">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="bulletinPrev" aria-label="이전 페이지">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <img id="bulletinImg" src="" alt="">
+      <div class="bulletin-placeholder" id="bulletinPlaceholder" style="display:none">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <p>주보 이미지 영역<br>스크립트의 bulletinImages 배열에<code>images/bulletin-1.jpg</code> 형식으로 실제 주보 이미지 경로를 넣어주세요</p>
+      </div>
+      <p class="bulletin-cap" id="bulletinCap"></p>
+      <button class="lightbox-nav lightbox-next" id="bulletinNext" aria-label="다음 페이지">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5L16 12L9 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 공지 팝업(사이트 방문 시 자동으로 뜨는 팝업): "오늘 하루 보지 않기"를 누르면 오늘 하루 동안 다시 뜨지 않습니다.
+       내용(이미지/제목/본문)은 아래 마크업을 원하는 내용으로 자유롭게 수정하세요. -->
+  <div class="site-popup" id="sitePopup" role="dialog" aria-modal="true" aria-label="공지사항">
+    <div class="site-popup-panel">
+      <button class="site-popup-close" id="sitePopupClose" aria-label="닫기">&times;</button>
+      <div class="site-popup-image">
+        <div class="placeholder">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="1.5" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="10" r="1.6" stroke="currentColor" stroke-width="1.3"/><path d="M3 17L8.5 12.5C9.2 11.9 10.2 11.9 10.9 12.5L14 15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          <p>공지 이미지 영역<br>images/popup-banner.jpg 를 교체해 넣어주세요</p>
+        </div>
+        <img src="images/popup-banner.jpg" alt="" onerror="this.style.display='none'">
+      </div>
+      <div class="site-popup-body">
+        <span class="eyebrow">공지사항</span>
+        <h3>8월 특별 새벽기도회 안내</h3>
+        <p>8월 넷째 주까지 매일 오전 5시 30분, 특별 새벽기도회로 함께 모입니다. 많은 참여와 기도 부탁드립니다.</p>
+        <div class="site-popup-actions">
+          <button type="button" class="site-popup-hide" id="sitePopupHideToday">오늘 하루 보지 않기</button>
+          <a href="#times" class="btn primary" id="sitePopupCta">자세히 보기</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 팝업을 닫은 뒤에도 다시 열어볼 수 있는 버튼 -->
+  <button type="button" class="site-popup-reopen" id="sitePopupReopen">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 8V12L15 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/></svg>
+    공지사항
+  </button>
 
 <script>
   // respect reduced-motion: pause the background video for users who prefer less motion
@@ -1538,6 +1713,142 @@
       videoFrame.appendChild(iframe);
     }
     // videoId가 없으면(링크를 아직 넣지 않았으면) HTML에 있는 placeholder가 그대로 표시됩니다.
+  })();
+
+  // ---------- 주보(BULLETIN) 모달 ----------
+  (function(){
+    // 실제 주보 이미지 경로를 여기에 넣어주세요. 여러 페이지(앞/뒤)가 있다면 배열에 추가하면
+    // 모달 안에서 좌우 화살표로 넘겨볼 수 있습니다. 예: 'images/bulletin-1.jpg', 'images/bulletin-2.jpg'
+    const bulletinImages = [
+      { src: 'images/bulletin-1.jpg', caption: '2026년 8월 23일 주보 · 1면' }
+      // { src: 'images/bulletin-2.jpg', caption: '2026년 8월 23일 주보 · 2면' },
+    ];
+
+    const bulletinLink = document.getElementById('bulletinLink');
+    const bulletinModal = document.getElementById('bulletinModal');
+    const bulletinImg = document.getElementById('bulletinImg');
+    const bulletinPlaceholder = document.getElementById('bulletinPlaceholder');
+    const bulletinCap = document.getElementById('bulletinCap');
+    const bulletinClose = document.getElementById('bulletinClose');
+    const bulletinPrev = document.getElementById('bulletinPrev');
+    const bulletinNext = document.getElementById('bulletinNext');
+
+    if (!bulletinLink || !bulletinModal) return;
+
+    let bulletinIndex = 0;
+
+    // 페이지가 1장뿐이면 좌우 화살표를 숨김
+    if (bulletinImages.length <= 1){
+      bulletinPrev.classList.add('bulletin-nav-hidden');
+      bulletinNext.classList.add('bulletin-nav-hidden');
+    }
+
+    function showBulletinAt(index){
+      if (!bulletinImages.length) return;
+      bulletinIndex = (index + bulletinImages.length) % bulletinImages.length;
+      const item = bulletinImages[bulletinIndex];
+      bulletinPlaceholder.style.display = 'none';
+      bulletinImg.style.display = 'block';
+      bulletinImg.onerror = () => {
+        bulletinImg.style.display = 'none';
+        bulletinPlaceholder.style.display = 'flex';
+      };
+      bulletinImg.src = item.src;
+      bulletinImg.alt = item.caption || '주보 이미지';
+      bulletinCap.textContent = item.caption || '';
+    }
+
+    function openBulletinModal(){
+      showBulletinAt(0);
+      bulletinModal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeBulletinModal(){
+      bulletinModal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    bulletinLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      openBulletinModal();
+    });
+    bulletinClose.addEventListener('click', closeBulletinModal);
+    bulletinPrev.addEventListener('click', () => showBulletinAt(bulletinIndex - 1));
+    bulletinNext.addEventListener('click', () => showBulletinAt(bulletinIndex + 1));
+
+    bulletinModal.addEventListener('click', (e) => {
+      if (e.target === bulletinModal) closeBulletinModal(); // 바깥 영역 클릭 시 닫기
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!bulletinModal.classList.contains('is-open')) return;
+      if (e.key === 'Escape') closeBulletinModal();
+      if (e.key === 'ArrowLeft') showBulletinAt(bulletinIndex - 1);
+      if (e.key === 'ArrowRight') showBulletinAt(bulletinIndex + 1);
+    });
+  })();
+
+  // ---------- 공지 팝업: 자동으로 열리고, "오늘 하루 보지 않기"를 지원 ----------
+  (function(){
+    const sitePopup = document.getElementById('sitePopup');
+    const closeBtn = document.getElementById('sitePopupClose');
+    const hideTodayBtn = document.getElementById('sitePopupHideToday');
+    const reopenBtn = document.getElementById('sitePopupReopen');
+    const ctaBtn = document.getElementById('sitePopupCta');
+    if (!sitePopup) return;
+
+    const STORAGE_KEY = 'bitgilChurchPopupHideUntil';
+
+    function todayString(){
+      const now = new Date();
+      return now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    }
+
+    function isHiddenToday(){
+      try{
+        return window.localStorage.getItem(STORAGE_KEY) === todayString();
+      } catch(e){
+        return false; // localStorage를 사용할 수 없는 환경에서는 항상 팝업을 보여줌
+      }
+    }
+
+    function openPopup(){
+      sitePopup.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (reopenBtn) reopenBtn.classList.remove('is-visible');
+    }
+
+    function closePopup(){
+      sitePopup.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (reopenBtn) reopenBtn.classList.add('is-visible');
+    }
+
+    function hideForToday(){
+      try{ window.localStorage.setItem(STORAGE_KEY, todayString()); } catch(e){ /* ignore */ }
+      closePopup();
+    }
+
+    // 페이지 로드 시: 오늘 하루 보지 않기를 누르지 않았다면 팝업을 띄움
+    if (!isHiddenToday()){
+      window.setTimeout(openPopup, 400); // 살짝 지연시켜 자연스럽게 등장
+    } else if (reopenBtn){
+      reopenBtn.classList.add('is-visible');
+    }
+
+    closeBtn.addEventListener('click', closePopup);
+    hideTodayBtn.addEventListener('click', hideForToday);
+    if (reopenBtn) reopenBtn.addEventListener('click', openPopup);
+    if (ctaBtn) ctaBtn.addEventListener('click', closePopup);
+
+    sitePopup.addEventListener('click', (e) => {
+      if (e.target === sitePopup) closePopup(); // 바깥 영역 클릭 시 닫기 (오늘 하루 보지 않기는 아님)
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (sitePopup.classList.contains('is-open') && e.key === 'Escape') closePopup();
+    });
   })();
 </script>
 
